@@ -1,4 +1,4 @@
-package com.wikia.dropwizard.logstash.appender;
+package es.urbanoalvarez.dropwizard.logstash.appender;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.logstash.logback.fieldnames.LogstashFieldNames;

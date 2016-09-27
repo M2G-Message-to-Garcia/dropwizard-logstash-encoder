@@ -1,11 +1,12 @@
-package com.wikia.dropwizard.logstash.appender;
+package es.urbanoalvarez.dropwizard.logstash.appender;
 
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
-import ch.qos.logback.core.Layout;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import io.dropwizard.logging.async.AsyncAppenderFactory;
+import io.dropwizard.logging.filter.LevelFilterFactory;
+import io.dropwizard.logging.layout.LayoutFactory;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 
@@ -45,7 +46,7 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     this.queueSize = queueSize;
   }
 
-  public Appender<ILoggingEvent> build(LoggerContext context, String applicationName, Layout<ILoggingEvent> layout) {
+  public Appender build(LoggerContext context, String applicationName, LayoutFactory layoutFactory, LevelFilterFactory levelFilterFactory, AsyncAppenderFactory asyncAppenderFactory) {
     final LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
     final LogstashEncoder encoder = new LogstashEncoder();
 
@@ -73,10 +74,10 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     }
 
     appender.setEncoder(encoder);
-    addThresholdFilter(appender, threshold);
+    levelFilterFactory.build(threshold);
     encoder.start();
     appender.start();
 
-    return wrapAsync(appender);
+    return wrapAsync(appender, asyncAppenderFactory);
   }
 }

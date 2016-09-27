@@ -6,9 +6,9 @@
 Maven:
 ```xml
 <dependency>
-  <groupId>com.wikia</groupId>
+  <groupId>es.urbanoalvarez</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
