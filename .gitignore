@@ -8,3 +8,4 @@ pom.xml.asc
 **.ipr
 **.iws
 .idea/
+settings.xml
