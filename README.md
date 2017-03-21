@@ -8,7 +8,7 @@ Maven:
 <dependency>
   <groupId>es.urbanoalvarez</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>2.0.0</version>
+  <version>2.0.3</version>
 </dependency>
 ```
 
