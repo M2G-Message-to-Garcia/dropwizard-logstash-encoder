@@ -37,7 +37,7 @@ public class LogstashAppenderFactoryHelper {
 
         fieldNames.setTimestamp(map.getOrDefault("timestamp", "@timestamp"));
         fieldNames.setVersion(map.getOrDefault("version", "@version"));
-        fieldNames.setMessage(map.getOrDefault("message", "message"));
+        fieldNames.setMessage(map.getOrDefault("message", "@message"));
         fieldNames.setFieldsMethod(map.getOrDefault("fieldsMethod", "@fields.method"));
         fieldNames.setFieldsProtocol(map.getOrDefault("fieldsProtocol", "@fields.protocol"));
         fieldNames.setFieldsStatusCode(map.getOrDefault("fieldsStatusCode", "@fields.status_code"));
