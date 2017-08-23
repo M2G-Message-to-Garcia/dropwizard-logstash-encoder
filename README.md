@@ -56,7 +56,7 @@ server:
         - type: logstash-access
           host: 127.0.0.1
           port: 8080
-          # Headers of Response and Request ins't logged for default, so it's need enable in fieldsName map;
+          # Headers of Response and Request ins't logged for default, so it's need to enable in fieldsName map;
           # see https://github.com/logstash/logstash-logback-encoder/blob/master/README.md#header-fields
           fieldNames:
             fieldsResponseHeaders: "responseHeaders"
