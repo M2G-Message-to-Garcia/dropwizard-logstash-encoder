@@ -19,19 +19,19 @@ You must configure dropwizard to use these appenders in your application.yml fil
 ```yml
 logging:
   appenders:
-    - type: logstash-socket # LogstashSocketAppender, for LogstashTcpSocketAppender use logstash-tcp
+    - type: logstash-socket use LogstashSocketAppender, logstash-tcp use LogstashTcpSocketAppender and logstach-access use LogstashAccessTcpSocketAppender
       ...
 ```
 
 Additional configuration keys for the appender, see [logstash-logback-encoder#usage](https://github.com/logstash/logstash-logback-encoder/blob/master/README.md#usage) for info. All configs apply to both `logstash-socket` and `logstash-tcp`, unless otherwise noted:
 * `host` - string - maps to `syslogHost` when using `logstash-socket`, and `remoteHost` when using `logstash-tcp`
 * `port` - int
-* `includeCallerInfo` - boolean
-* `includeContext` - boolean
-* `includeMdc` - boolean
+* `includeCallerInfo` - boolean - not valid for `logstash-access`
+* `includeContext` - boolean - not valid for `logstash-access`
+* `includeMdc` - boolean - not valid for `logstash-access`
 * `customFields` - hashmap - the configuration differs from the original logstash-logback-encoder config in that this is not a raw json string (see example below)
 * `fieldNames` - hashmap
-* `queueSize` - int - only valid for `logstash-tcp`
+* `queueSize` - int - only valid for `logstash-tcp` and `logstash-access`
 * `includeCallerData` - bool - only valid for `logstash-tcp`
 
 Example config:
@@ -46,6 +46,21 @@ logging:
       customFields:
         myTestField1: myTestVal
         myTestField2: 2
+```
+
+and server config:
+```yaml
+server:
+  requestLog:
+    appenders:
+        - type: logstash-access
+          host: 127.0.0.1
+          port: 8080
+          # Headers of Response and Request ins't logged for default, so it's need to enable in fieldsName map;
+          # see https://github.com/logstash/logstash-logback-encoder/blob/master/README.md#header-fields
+          fieldNames:
+            fieldsResponseHeaders: "responseHeaders"
+            fieldsRequestHeaders: "requestHeaders"
 ```
 
 Then, loggers can be used the same way as if they were configured using logback.xml for logstash-logback-encoder, example (using Guava):

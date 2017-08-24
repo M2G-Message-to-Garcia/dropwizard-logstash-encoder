@@ -1,2 +1,3 @@
-es.urbanoalvarez.dropwizard.logstash.appender.LogstashSocketAppenderFactory
-es.urbanoalvarez.dropwizard.logstash.appender.LogstashTcpAppenderFactory
+es.urbanoalvarez.dropwizard.logstash.appender.classic.LogstashSocketAppenderFactory
+es.urbanoalvarez.dropwizard.logstash.appender.classic.LogstashTcpAppenderFactory
+es.urbanoalvarez.dropwizard.logstash.appender.access.LogstashAccessAppenderFactory
